@@ -20,16 +20,30 @@ def is_possible(n, x, y):
                 return False
     return True
 
+def is_zero(x, y):
+    global grid
+
+    if grid[x][y] == 0:
+        return True
+
+def verify_all_numbers(x, y):
+    global grid
+
+    for n in range(1, 10):
+        if is_possible(n, x, y):
+            grid[x][y] = n
+            solve()
+            grid[x][y] = 0
+    return
+
+
+
 def solve():
     global grid
+
     for x in range(9):
         for y in range(9):
-            if grid[x][y] == 0:
-                for n in range(1,10):
-                    if is_possible(n, x, y):
-                        grid[x][y] = n
-                        solve()
-                        grid[x][y] = 0
-                return
+            if is_zero(x, y):
+                verify_all_numbers(x, y)
     print("Solução:\n")
     print(np.matrix(grid), "\n")
