@@ -25,6 +25,8 @@ def is_zero(x, y):
 
     if grid[x][y] == 0:
         return True
+    else:
+        return False
 
 def verify_all_numbers(x, y):
     global grid
