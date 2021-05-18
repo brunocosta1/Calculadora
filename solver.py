@@ -26,6 +26,14 @@ def verify_square(x, y, n):
             if grid[x1+i][y1+j] == n:
                 return False
 
+def is_zero(x, y):
+    global grid
+
+    if grid[x][y] == 0:
+        return True
+    else:
+        return False
+
 def is_possible(n, x, y):
     global grid
 
@@ -35,13 +43,6 @@ def is_possible(n, x, y):
 
     return True
 
-def is_zero(x, y):
-    global grid
-
-    if grid[x][y] == 0:
-        return True
-    else:
-        return False
 
 def verify_all_numbers(x, y):
     global grid
