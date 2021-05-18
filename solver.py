@@ -1,5 +1,5 @@
 # Arquivo responsável com as funções que vão resolver o sudoku.
-import numpy
+import numpy as np
 
 def verify_column(y, n):
     global grid
