@@ -66,3 +66,4 @@ def solve():
 
     print("Solução:\n")
     print(np.matrix(grid), "\n")
+
