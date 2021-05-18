@@ -1,23 +1,38 @@
 # Arquivo responsável com as funções que vão resolver o sudoku.
 import numpy
 
-def is_possible(n, x, y):
+def verify_column(y, n):
     global grid
-    for i in range(0,9):
+
+    for i in range(10):
         if grid[i][y] == n:
             return False
 
-    for i in range(0, 9):
+def verify_line(x, n):
+    global grid
+
+    for i in range(10):
         if grid[x][i] == n:
             return False
 
-    x1 = (x//3)*3
-    y1 = (y//3)*3
+def verify_square(x, y, n):
+    global grid
 
-    for i in range(0, 3):
-        for j in range(0, 3):
+    x1 = (x // 3) * 3
+    y1 = (y // 3) * 3
+
+    for i in range(4):
+        for j in range(4):
             if grid[x1+i][y1+j] == n:
                 return False
+
+def is_possible(n, x, y):
+    global grid
+
+    verify_column(y, n)
+    verify_line(x, n)
+    verify_square(x, y, n)
+
     return True
 
 def is_zero(x, y):
@@ -47,5 +62,6 @@ def solve():
         for y in range(9):
             if is_zero(x, y):
                 verify_all_numbers(x, y)
+
     print("Solução:\n")
     print(np.matrix(grid), "\n")
