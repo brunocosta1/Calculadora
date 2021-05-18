@@ -29,6 +29,8 @@ def ouvir_microfone():
                 if frase in lista:
                     print("Você disse: "+ frase)
                     break
+                else:
+                    print("O que você disse não é um número de 1 a 9. Repita.")
             except sr.UnknownValueError:
                 print("Não entendi.")
 
@@ -45,3 +47,4 @@ def InputValues():
             print(np.matrix(grid))
             os.system("sleep 0.5")
             os.system("clear")
+
