@@ -1,69 +1,92 @@
 # Arquivo responsável com as funções que vão resolver o sudoku.
 import numpy as np
+from entry_values import grid
 
-def verify_column(y, n):
-    global grid
+def verify_column(grid, y, n):
 
-    for i in range(10):
+    for i in range(0,9):
         if grid[i][y] == n:
             return False
 
-def verify_line(x, n):
-    global grid
+def verify_line(grid, x, n):
 
-    for i in range(10):
+    for i in range(0,9):
         if grid[x][i] == n:
             return False
 
-def verify_square(x, y, n):
-    global grid
+def verify_square(grid, x, y, n):
 
     x1 = (x // 3) * 3
     y1 = (y // 3) * 3
 
-    for i in range(4):
-        for j in range(4):
+    for i in range(3):
+        for j in range(3):
             if grid[x1+i][y1+j] == n:
                 return False
 
-def is_zero(x, y):
-    global grid
+def is_zero(grid, x, y):
 
     if grid[x][y] == 0:
         return True
     else:
         return False
 
-def is_possible(n, x, y):
-    global grid
+def is_possible(grid, n, x, y):
 
-    verify_column(y, n)
-    verify_line(x, n)
-    verify_square(x, y, n)
+    # verify_column(grid, y, n)
+    # verify_line(grid, x, n)
+    # verify_square(grid, x, y, n)
 
+    for i in range(0,9):
+        if grid[i][y] == n:
+            return False
+
+    for i in range(0, 9):
+        if grid[x][i] == n:
+            return False
+
+    x1 = (x//3)*3
+    y1 = (y//3)*3
+
+    for i in range(0, 3):
+        for j in range(0, 3):
+            if grid[x1+i][y1+j] == n:
+                return False
     return True
 
 
-def verify_all_numbers(x, y):
-    global grid
+def verify_all_numbers(grid, x, y):
 
     for n in range(1, 10):
-        if is_possible(n, x, y):
+        if is_possible(grid, n, x, y):
             grid[x][y] = n
-            solve()
+            solve(grid)
             grid[x][y] = 0
     return
 
 
 
-def solve():
-    global grid
+def solve(grid):
 
     for x in range(9):
         for y in range(9):
-            if is_zero(x, y):
-                verify_all_numbers(x, y)
+            if is_zero(grid, x, y):
+                # verify_all_numbers(grid, x, y)
+                for n in range(1, 10):
+                    if is_possible(grid, n, x, y):
+                        grid[x][y] = n
+                        solve(grid)
+                        grid[x][y] = 0
+                return
 
-    print("Solução:\n")
+    # for x in range(9):
+        # for y in range(9):
+            # if grid[x][y] == 0:
+                # for n in range(1,10):
+                    # if is_possible(grid, n, x, y):
+                        # grid[x][y] = n
+                        # solve(grid)
+                        # grid[x][y] = 0
+                # return
+    print("Solution:\n")
     print(np.matrix(grid), "\n")
-
