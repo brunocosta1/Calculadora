@@ -1,5 +1,4 @@
 # Arquivo responsável para a entrada dos valores do sudoku.
-
 import speech_recognition as sr
 import os
 import numpy as np
@@ -13,6 +12,19 @@ grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+# grid_example = [
+    # [0,0,7,0,4,0,0,0,0],
+    # [0,0,0,0,0,8,0,0,6],
+    # [0,4,1,0,0,0,9,0,0],
+    # [0,0,0,0,0,0,1,7,0],
+    # [0,0,0,0,0,6,0,0,0],
+    # [0,0,8,7,0,0,2,0,0],
+    # [3,0,0,0,0,0,0,0,0],
+    # [0,0,0,1,2,0,0,0,0],
+    # [8,6,0,0,7,0,0,0,5]
+# ]
+
 
 def ouvir_microfone():
 
@@ -36,7 +48,8 @@ def ouvir_microfone():
 
     return frase
 
-def InputValues():
+def Input_Audio():
+
     global grid
 
     for i in range(9):
@@ -47,4 +60,36 @@ def InputValues():
             print(np.matrix(grid))
             os.system("sleep 0.5")
             os.system("clear")
+
+def Input_KeyBoard():
+
+
+    global grid
+
+    for i in range(9):
+        for j in range(9):
+            print(np.matrix(grid))
+            grid[i][j] = int(input("Fale o valor que se encontra na linha"+str(i)+"coluna"+str(j)+":"))
+            print(np.matrix(grid))
+            os.system("clear")
+
+
+def InputValues(opc):
+    global grid
+
+    # for i in range(9):
+        # for j in range(9):
+            # print(np.matrix(grid))
+            # print("Fale o valor que se encontra na linha "+str(i)+"coluna"+str(j)+":")
+            # grid[i][j] = int(ouvir_microfone())
+            # print(np.matrix(grid))
+            # os.system("sleep 0.5")
+            # os.system("clear")
+
+    if(opc == 1):
+        Input_Audio()
+    elif(opc == 2):
+        Input_KeyBoard()
+
+
 
